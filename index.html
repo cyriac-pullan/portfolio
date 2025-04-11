@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyriac Paul Pullan | AI & Software Developer</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- GSAP for advanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        neon: {
+                            blue: '#00f3ff',
+                            'blue-dark': '#00a8ff',
+                            'blue-light': '#00ffff',
+                            'blue-glow': 'rgba(0, 255, 255, 0.3)',
+                            'blue-shadow': '0 0 10px rgba(0, 255, 255, 0.5)',
+                        },
+                        dark: {
+                            '900': '#0a0a0a',
+                            '800': '#121212',
+                            '700': '#1a1a1a',
+                        },
+                        primary: '#00f3ff',
+                        'primary-dark': '#00a8ff',
+                        'primary-light': '#00ffff',
+                        background: '#0a0a0a',
+                        'card-bg': '#121212',
+                    },
+                    boxShadow: {
+                        'neon': '0 0 10px rgba(0, 255, 255, 0.5), 0 0 20px rgba(0, 255, 255, 0.3)',
+                        'neon-sm': '0 0 5px rgba(0, 255, 255, 0.3), 0 0 10px rgba(0, 255, 255, 0.2)',
+                    },
+                    textShadow: {
+                        'neon': '0 0 5px rgba(0, 255, 255, 0.5), 0 0 10px rgba(0, 255, 255, 0.3)',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-dark-900 text-gray-100 font-['Inter']">
+    <!-- Scroll Progress Bar -->
+    <div id="progress-bar" class="fixed top-0 left-0 h-1 bg-neon-blue shadow-neon-sm"></div>
+
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" class="fixed top-4 right-4 p-2 rounded-full bg-dark-800 shadow-neon-sm hover:shadow-neon transition-all duration-300">
+        <i class="fas fa-moon text-neon-blue"></i>
+    </button>
+
+    <!-- Header -->
+    <header id="navbar" class="fixed top-0 left-0 w-full bg-dark-800/90 backdrop-blur-md shadow-neon-sm z-50 transition-all duration-300">
+        <div class="container mx-auto px-4">
+            <nav class="flex justify-between items-center py-4">
+                <div class="logo text-2xl font-bold text-neon-blue">
+                    Cyriac<span class="text-gray-100">Pullan</span>
+                </div>
+                <div class="nav-links hidden md:flex space-x-8">
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#experience" class="nav-link">Experience</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#achievements" class="nav-link">Achievements</a>
+                    <a href="#contact" class="nav-link">Contact</a>
+                </div>
+                <button id="mobile-menu-button" class="md:hidden">
+                    <div class="hamburger">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </button>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="fixed inset-0 bg-white dark:bg-slate-900 z-40 transform translate-x-full transition-transform duration-300 md:hidden">
+        <div class="container mx-auto px-4 py-20">
+            <div class="flex flex-col space-y-6">
+                <a href="#about" class="nav-link text-2xl">About</a>
+                <a href="#experience" class="nav-link text-2xl">Experience</a>
+                <a href="#projects" class="nav-link text-2xl">Projects</a>
+                <a href="#achievements" class="nav-link text-2xl">Achievements</a>
+                <a href="#contact" class="nav-link text-2xl">Contact</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero min-h-screen flex items-center justify-center relative overflow-hidden" data-aos="fade-up">
+        <div class="container mx-auto px-4 py-20">
+            <div class="text-center">
+                <h1 class="text-5xl md:text-6xl font-bold mb-4 typewriter">Cyriac Paul Pullan</h1>
+                <h2 class="text-2xl md:text-3xl text-primary mb-8">Software Development Intern</h2>
+                <div class="contact-info flex flex-wrap justify-center gap-4 mb-8">
+                    <div class="contact-item flex items-center">
+                        <i class="fas fa-phone mr-2"></i>
+                        <span>+91 944646299</span>
+                    </div>
+                    <div class="contact-item flex items-center">
+                        <i class="fas fa-envelope mr-2"></i>
+                        <span>cyriac880@gmail.com</span>
+                    </div>
+                    <div class="contact-item flex items-center">
+                        <i class="fas fa-map-marker-alt mr-2"></i>
+                        <span>Ernakulam, Kerala 686661</span>
+                    </div>
+                </div>
+                <p class="max-w-2xl mx-auto mb-8 text-gray-600 dark:text-gray-300">
+                    I am a dynamic software development intern with experience at Infosys. I specialize in Python programming and machine learning, having successfully enhanced AI models for e-learning platforms.
+                </p>
+                <div class="flex justify-center gap-4">
+                    <a href="#contact" class="btn-primary">Contact Me</a>
+                    <a href="#projects" class="btn-secondary">View Projects</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section id="about" class="py-20 bg-white dark:bg-slate-800" data-aos="fade-up">
+            <div class="container">
+                <h2 class="text-3xl font-bold text-indigo-600 dark:text-indigo-400 mb-6">Professional Summary</h2>
+                <div class="summary-content text-gray-600 dark:text-gray-300">
+                    <p>I am a dynamic software development intern with experience at Infosys. I specialize in Python programming and machine learning, having successfully enhanced AI models for e-learning platforms. My role at Acadamer demonstrated my strong problem-solving skills and ability to collaborate effectively on complex projects. I thrive in environments that challenge my creativity and technical skills.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="py-20 bg-gray-50 dark:bg-slate-800" data-aos="fade-up">
+            <div class="container">
+                <h2 class="text-3xl font-bold text-indigo-600 dark:text-indigo-400 mb-6">Professional Experience</h2>
+                <div class="experience-grid">
+                    <div class="experience-card">
+                        <h3>Software Development Intern</h3>
+                        <p class="company">Infosys India</p>
+                        <p class="duration">11/2024 - 2025</p>
+                        <ul class="responsibilities">
+                            <li>Completed foundational training in emerging technologies, including Python, AI/ML, and cloud computing</li>
+                            <li>Worked on a capstone project involving basic data analysis and algorithm development</li>
+                            <li>Gained insights into IT industry workflows, project documentation, and team collaboration in virtual environments</li>
+                        </ul>
+                    </div>
+                    <div class="experience-card">
+                        <h3>AI Intern</h3>
+                        <p class="company">Acadamer India</p>
+                        <p class="duration">11/2023 - 12/2023</p>
+                        <ul class="responsibilities">
+                            <li>Worked on developing and fine-tuning AI models related to education and e-learning platforms</li>
+                            <li>Gained hands-on experience in Python programming, machine learning concepts, and API integration</li>
+                            <li>Collaborated with a remote team to improve content personalization using basic AI techniques</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="education" class="py-20 bg-white dark:bg-slate-800" data-aos="fade-up">
+            <div class="container">
+                <h2 class="text-3xl font-bold text-indigo-600 dark:text-indigo-400 mb-6">Education</h2>
+                <div class="education-grid">
+                    <div class="education-card">
+                        <h3>Bachelor's Degree in Artificial Intelligence And Data Science</h3>
+                        <p class="institution">Viswajyothi College Of Engineering And Technology, Vazhakulam</p>
+                        <p class="duration">01/2022 - 01/2026</p>
+                    </div>
+                    <div class="education-card">
+                        <h3>Higher Secondary Education</h3>
+                        <p class="institution">KEEMS Mannanam</p>
+                        <p class="duration">01/2020 - 01/2022</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="py-20 bg-gray-50 dark:bg-slate-800" data-aos="fade-up">
+            <div class="container">
+                <h2 class="text-3xl font-bold text-indigo-600 dark:text-indigo-400 mb-6">Projects</h2>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-card-inner">
+                            <div class="project-card-front">
+                                <h3>Smart Spectacles for Visually Impaired Individuals</h3>
+                                <p>An innovative tool for assisting visually impaired users with real-time object detection and navigation assistance.</p>
+                                <div class="tech-stack">
+                                    <span>Computer Vision</span>
+                                    <span>Python</span>
+                                    <span>Embedded Systems</span>
+                                </div>
+                            </div>
+                            <div class="project-card-back">
+                                <h3>Project Details</h3>
+                                <p>Click to flip back</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-card-inner">
+                            <div class="project-card-front">
+                                <h3>Market Maven - AI-Driven Sales Forecasting</h3>
+                                <p>Enhanced sales forecasting in retail using AI-driven analytics and predictive modeling.</p>
+                                <div class="tech-stack">
+                                    <span>Machine Learning</span>
+                                    <span>ARIMA</span>
+                                    <span>Python</span>
+                                </div>
+                            </div>
+                            <div class="project-card-back">
+                                <h3>Project Details</h3>
+                                <p>Click to flip back</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-card-inner">
+                            <div class="project-card-front">
+                                <h3>Healthcare Android Application</h3>
+                                <p>Streamlined healthcare services through mobile technology with patient management and appointment scheduling.</p>
+                                <div class="tech-stack">
+                                    <span>Java</span>
+                                    <span>Android</span>
+                                    <span>SQLite</span>
+                                </div>
+                            </div>
+                            <div class="project-card-back">
+                                <h3>Project Details</h3>
+                                <p>Click to flip back</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-card-inner">
+                            <div class="project-card-front">
+                                <h3>Airplane Control Game Using MPU6050 and ESP32</h3>
+                                <p>Interactive gaming experience showcasing hardware-software integration with motion controls.</p>
+                                <div class="tech-stack">
+                                    <span>ESP32</span>
+                                    <span>Embedded Systems</span>
+                                    <span>C++</span>
+                                </div>
+                            </div>
+                            <div class="project-card-back">
+                                <h3>Project Details</h3>
+                                <p>Click to flip back</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills" class="py-20 bg-white dark:bg-slate-800" data-aos="fade-up">
+            <div class="container">
+                <h2 class="text-3xl font-bold text-indigo-600 dark:text-indigo-400 mb-6">Skills & Expertise</h2>
+                <div class="skills-grid">
+                    <div class="skill-category">
+                        <h3>Technical Skills</h3>
+                        <div class="skills-list">
+                            <span>Python</span>
+                            <span>Java</span>
+                            <span>Machine Learning</span>
+                            <span>Deep Learning</span>
+                            <span>NLP</span>
+                            <span>Computer Vision</span>
+                            <span>ARIMA</span>
+                            <span>SQLite</span>
+                            <span>Embedded Systems</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Languages</h3>
+                        <div class="skills-list">
+                            <span>Malayalam (Native)</span>
+                            <span>English (Proficient)</span>
+                            <span>Hindi (Advanced)</span>
+                        </div>
+                    </div>
+                    <div class="skill-category">
+                        <h3>Strengths</h3>
+                        <div class="skills-list">
+                            <span>Problem Solving</span>
+                            <span>Team Collaboration</span>
+                            <span>Algorithm Development</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="achievements" class="py-20 bg-gray-50 dark:bg-slate-800" data-aos="fade-up">
+            <div class="container">
+                <h2 class="text-3xl font-bold text-indigo-600 dark:text-indigo-400 mb-6">Key Achievements</h2>
+                <div class="achievements-grid">
+                    <div class="achievement-card">
+                        <h3>Hackathon Success</h3>
+                        <p>Secured 3rd place in a national-level hackathon</p>
+                    </div>
+                    <div class="achievement-card">
+                        <h3>Technical Training</h3>
+                        <p>Successfully completed foundational training in emerging technologies</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="py-20 bg-gray-50 dark:bg-slate-800" data-aos="fade-up">
+            <div class="container">
+                <h2 class="text-3xl font-bold text-indigo-600 dark:text-indigo-400 mb-6">Contact</h2>
+                <div class="contact-info">
+                    <p><i class="fas fa-envelope"></i> cyriac880@gmail.com</p>
+                    <p><i class="fas fa-phone"></i> +91 944646299</p>
+                    <p><i class="fas fa-map-marker-alt"></i> Ernakulam, Kerala 686661</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i> LinkedIn</a>
+                        <a href="#" class="social-link"><i class="fab fa-github"></i> GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Contact Button -->
+    <a href="#contact" class="fixed bottom-8 right-8 bg-indigo-600 dark:bg-indigo-400 text-white p-4 rounded-full shadow-lg hover:bg-indigo-700 dark:hover:bg-indigo-500 transition-colors duration-300 z-50">
+        <i class="fas fa-envelope text-xl"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-8" data-aos="fade-up">
+        <div class="container mx-auto px-4 text-center">
+            <div class="social-links flex justify-center space-x-6 mb-4">
+                <a href="#" class="social-link hover:text-primary transition-colors duration-300">
+                    <i class="fab fa-linkedin-in"></i>
+                </a>
+                <a href="#" class="social-link hover:text-primary transition-colors duration-300">
+                    <i class="fab fa-github"></i>
+                </a>
+                <a href="#" class="social-link hover:text-primary transition-colors duration-300">
+                    <i class="fab fa-twitter"></i>
+                </a>
+                <a href="#" class="social-link hover:text-primary transition-colors duration-300">
+                    <i class="fab fa-instagram"></i>
+                </a>
+            </div>
+            <p class="text-gray-400">&copy; <span id="year"></span> Cyriac Paul Pullan. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

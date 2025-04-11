@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cyriac Paul Pullan | AI Developer Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #2A5C82;
+            --accent: #FF6B6B;
+            --dark: #1a1a1a;
+            --light: #ffffff;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui;
+            background: var(--dark);
+            color: var(--light);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Dark/Light Theme */
+        body.light-theme {
+            --dark: #ffffff;
+            --light: #1a1a1a;
+            background: var(--dark);
+        }
+
+        /* Header */
+        .header {
+            padding: 2rem;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .contact-bar {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .contact-bar a {
+            color: var(--light);
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            border: 2px solid var(--primary);
+            border-radius: 25px;
+            transition: var(--transition);
+        }
+
+        .contact-bar a:hover {
+            background: var(--primary);
+        }
+
+        /* Timeline */
+        .timeline {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            padding: 4rem 2rem;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            width: 4px;
+            height: 100%;
+            background: var(--primary);
+            transform: translateX(-50%);
+        }
+
+        .timeline-node {
+            background: rgba(42, 92, 130, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .timeline-node.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-node::before {
+            content: '';
+            position: absolute;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--accent);
+            border-radius: 50%;
+        }
+
+        .timeline-node:nth-child(odd)::before {
+            left: -40px;
+        }
+
+        .timeline-node:nth-child(even)::before {
+            right: -40px;
+        }
+
+        /* Projects */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 2rem;
+        }
+
+        .project-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Skills */
+        .skills-container {
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .skill-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 5px;
+            margin: 1rem 0;
+            overflow: hidden;
+        }
+
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            width: 0;
+            transition: width 1s ease-in-out;
+        }
+
+        /* Theme Toggle */
+        .theme-toggle {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 1000;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            background: var(--dark);
+            padding: 2rem;
+            border-radius: 15px;
+            max-width: 600px;
+            margin: 2rem auto;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-node::before {
+                left: -30px !important;
+            }
+
+            .timeline-node:nth-child(even)::before {
+                right: auto;
+                left: -30px !important;
+            }
+
+            h1 {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" onclick="toggleTheme()">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="header">
+        <div class="hero-content">
+            <h1>Cyriac Paul Pullan</h1>
+            <p class="subtitle">AI & Machine Learning Developer</p>
+            <div class="contact-bar">
+                <a href="tel:+91944646299"><i class="fas fa-phone"></i> +91 944646299</a>
+                <a href="mailto:cyriac880@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Timeline -->
+    <section class="timeline">
+        <div class="timeline-node">
+            <h3>🚀 Infosys Internship</h3>
+            <p>2024-2025</p>
+            <ul>
+                <li>AI/ML Development</li>
+                <li>Cloud Computing</li>
+                <li>Data Analysis</li>
+            </ul>
+        </div>
+        <div class="timeline-node">
+            <h3>🧠 Acadamer AI Projects</h3>
+            <p>2023</p>
+            <ul>
+                <li>Education Models</li>
+                <li>Python Development</li>
+                <li>API Integration</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Projects -->
+    <section class="project-grid">
+        <div class="project-card" onclick="openModal('spectacles')">
+            <h4>Smart Spectacles 👓</h4>
+            <p>Computer Vision for Visually Impaired</p>
+        </div>
+        <div class="project-card" onclick="openModal('maven')">
+            <h4>Market Maven 📈</h4>
+            <p>AI Sales Forecasting</p>
+        </div>
+    </section>
+
+    <!-- Skills -->
+    <section class="skills-container">
+        <h2>Technical Proficiencies</h2>
+        <div class="skill">
+            <div class="skill-bar">
+                <div class="skill-progress" data-width="95"></div>
+            </div>
+            <span>Python</span>
+        </div>
+        <div class="skill">
+            <div class="skill-bar">
+                <div class="skill-progress" data-width="85"></div>
+            </div>
+            <span>Machine Learning</span>
+        </div>
+    </section>
+
+    <!-- Modals -->
+    <div id="spectacles" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3>Smart Spectacles</h3>
+            <p>Technologies: Embedded Systems, Computer Vision</p>
+            <p>Developed assistive technology using...</p>
+        </div>
+    </div>
+
+    <script>
+        // Theme Toggle
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            const icon = document.querySelector('.theme-toggle i');
+            icon.classList.toggle('fa-moon');
+            icon.classList.toggle('fa-sun');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+
+        // Scroll Animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    if (entry.target.querySelector('.skill-progress')) {
+                        const progress = entry.target.querySelector('.skill-progress');
+                        progress.style.width = progress.dataset.width + '%';
+                    }
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.timeline-node, .skill').forEach(el => observer.observe(el));
+
+        // Modal Handling
+        function openModal(modalId) {
+            document.getElementById(modalId).style.display = 'block';
+        }
+
+        function closeModal() {
+            document.querySelectorAll('.modal').forEach(modal => {
+                modal.style.display = 'none';
+            });
+        }
+
+        // Initialize theme
+        if (localStorage.getItem('theme') === 'light') {
+            document.body.classList.add('light-theme');
+            document.querySelector('.theme-toggle i').classList.replace('fa-moon', 'fa-sun');
+        }
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
