@@ -477,77 +477,199 @@
         }
 
         .project-card {
-            background: rgba(248, 250, 252, 0.05);
+            background: rgba(37, 99, 235, 0.05);
             border-radius: 15px;
-            padding: 1.5rem;
+            padding: 0;
             transition: var(--transition);
             cursor: pointer;
-            height: 200px;
+            height: 400px;
             display: flex;
             flex-direction: column;
-            justify-content: center;
             position: relative;
             overflow: hidden;
-            border: 1px solid rgba(248, 250, 252, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            transform: translateY(0);
+            transition: all 0.3s ease;
         }
 
-        body.light-theme .project-card {
-            background: rgba(15, 23, 42, 0.05);
-            border: 1px solid rgba(15, 23, 42, 0.1);
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.1);
+            border-color: var(--primary);
         }
 
-        .project-card::before {
+        .project-thumbnail {
+            width: 100%;
+            height: 240px;
+            overflow: hidden;
+            position: relative;
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(244, 63, 94, 0.1));
+        }
+
+        .project-thumbnail img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            background: rgba(15, 23, 42, 0.8);
+        }
+
+        .project-card:hover .project-thumbnail img {
+            transform: scale(1.05);
+        }
+
+        .project-thumbnail::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(45deg, var(--primary), transparent);
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(37, 99, 235, 0.2), rgba(244, 63, 94, 0.2));
+            z-index: 1;
             opacity: 0;
-            transition: var(--transition);
-            z-index: 0;
+            transition: opacity 0.3s ease;
         }
 
-        .project-card:hover::before {
-            opacity: 0.3;
+        .project-card:hover .project-thumbnail::before {
+            opacity: 1;
         }
 
-        .project-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
-        }
-
-        .project-card h4 {
-            position: relative;
-            z-index: 1;
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .project-card p {
-            position: relative;
-            z-index: 1;
-            opacity: 0.8;
-        }
-
-        .project-card .view-project {
+        .project-thumbnail-overlay {
             position: absolute;
-            bottom: -30px;
-            right: 20px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(4px);
+            opacity: 0;
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .project-card:hover .project-thumbnail-overlay {
+            opacity: 1;
+        }
+
+        .project-thumbnail-text {
+            color: var(--light);
+            font-size: 1.1rem;
+            font-weight: 500;
+            text-align: center;
+            padding: 1rem;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+            background: rgba(37, 99, 235, 0.2);
+            border-radius: 8px;
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            max-width: 80%;
+            line-height: 1.5;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-card:hover .project-thumbnail-text {
+            transform: translateY(0);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            background: rgba(37, 99, 235, 0.05);
+            border-top: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin: 0.75rem 0;
+        }
+
+        .tech-tag {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            padding: 0.3rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .tech-tag {
+            background: rgba(37, 99, 235, 0.2);
+        }
+
+        .project-links {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1rem;
+        }
+
+        .project-link {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+        }
+
+        .github-link {
+            background: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+        }
+
+        .github-link:hover {
+            background: var(--primary);
+            color: var(--light);
+            transform: translateY(-2px);
+        }
+
+        .demo-link {
+            background: rgba(244, 63, 94, 0.1);
+            color: var(--accent);
+        }
+
+        .demo-link:hover {
             background: var(--accent);
+            color: var(--light);
+            transform: translateY(-2px);
+        }
+
+        .view-project {
+            background: var(--primary);
             color: var(--light);
             border: none;
             padding: 0.5rem 1rem;
-            border-radius: 20px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: var(--transition);
-            opacity: 0;
+            transition: all 0.3s ease;
+            text-align: center;
+            width: 100%;
+            font-size: 0.9rem;
         }
 
-        .project-card:hover .view-project {
-            bottom: 20px;
-            opacity: 1;
+        .view-project:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        body.light-theme .project-card {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(15, 23, 42, 0.1);
+        }
+
+        body.light-theme .tech-tag {
+            background: rgba(37, 99, 235, 0.1);
         }
 
         /* Skills */
@@ -696,73 +818,109 @@
         /* Achievements */
         .achievements-section {
             padding: 6rem 2rem;
-            background: linear-gradient(135deg, rgba(42, 92, 130, 0.1), rgba(26, 26, 26, 0.9));
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(26, 26, 26, 0.9));
         }
 
         .achievements-container {
-            max-width: 800px;
+            max-width: 1200px;
             margin: 0 auto;
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        @media (min-width: 1024px) {
+            .achievements-container {
+                flex-wrap: nowrap;
+            }
         }
 
         .achievement-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(37, 99, 235, 0.05);
             border-radius: 15px;
-            padding: 2rem;
-            margin-bottom: 2rem;
+            padding: 1.5rem;
             border-left: 4px solid var(--primary);
-            transform: translateX(-20px);
             opacity: 0;
-            transition: all 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-            border: 1px solid rgba(248, 250, 252, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            flex: 1;
+            min-width: 300px;
+            max-width: 380px;
+            transform: translateY(20px);
         }
 
         .achievement-card.visible {
-            transform: translateX(0);
             opacity: 1;
+            transform: translateY(0);
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.1);
+        }
+
+        .achievement-icon {
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
         }
 
         .achievement-card h3 {
-            color: var(--accent);
-            margin-bottom: 1rem;
-            font-size: 1.5rem;
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
         }
 
         .achievement-card .institution {
-            color: var(--primary);
+            color: var(--accent);
             margin-bottom: 0.5rem;
             font-weight: 500;
-        }
-
-        .achievement-card .period {
-            color: var(--light);
-            opacity: 0.7;
-            margin-bottom: 1rem;
             font-size: 0.9rem;
         }
 
         .achievement-card p {
-            line-height: 1.6;
+            line-height: 1.5;
             color: var(--light);
             opacity: 0.9;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
 
-        body.light-theme .achievement-card {
-            background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(30, 41, 59, 0.1);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-        }
-
-        body.light-theme .achievement-card h3 {
-            color: var(--accent);
-        }
-
-        body.light-theme .achievement-card .institution {
+        .achievement-badge {
+            background: rgba(37, 99, 235, 0.1);
             color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: inline-block;
+            margin-bottom: 0.5rem;
         }
 
-        body.light-theme .achievement-card .period,
-        body.light-theme .achievement-card p {
-            color: var(--light);
+        .achievement-link {
+            display: inline-block;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .achievement-link:hover {
+            color: var(--primary);
+            transform: translateX(5px);
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-divider::after {
+            background: linear-gradient(90deg, transparent, rgba(37, 99, 235, 0.8), transparent);
         }
 
         /* Theme Toggle */
@@ -1076,6 +1234,311 @@
         body.light-theme .download-btn {
             border: 1px solid rgba(15, 23, 42, 0.2);
         }
+
+        /* Contact Form Styles */
+        .contact-section {
+            padding: 4rem 2rem;
+            background: var(--dark);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2rem;
+            border-radius: 1rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group label {
+            color: var(--light);
+            font-weight: 500;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            padding: 0.75rem;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--light);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.2);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: var(--primary);
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .submit-btn:hover {
+            background: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(244, 63, 94, 0.3);
+        }
+
+        .contact-info {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        .contact-info a {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-info a:hover {
+            color: var(--accent);
+        }
+
+        /* Light theme adjustments */
+        body.light-theme .contact-container {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        body.light-theme .form-group input,
+        body.light-theme .form-group textarea {
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            color: var(--light);
+        }
+
+        @media (max-width: 768px) {
+            .contact-container {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Project Card Styles */
+        .project-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .project-link {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: var(--transition);
+        }
+
+        .github-link {
+            background: rgba(37, 99, 235, 0.2);
+            color: var(--primary);
+        }
+
+        .github-link:hover {
+            background: var(--primary);
+            color: var(--light);
+        }
+
+        .demo-link {
+            background: rgba(244, 63, 94, 0.2);
+            color: var(--accent);
+        }
+
+        .demo-link:hover {
+            background: var(--accent);
+            color: var(--light);
+        }
+
+        body.light-theme .github-link {
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        body.light-theme .demo-link {
+            background: rgba(244, 63, 94, 0.1);
+        }
+
+        /* Add these styles after your existing CSS */
+        
+        /* Achievement Cards */
+        .space-card {
+            background: rgba(15, 23, 42, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(56, 189, 248, 0.1);
+            transition: all 0.3s ease;
+            max-width: 380px; /* Control maximum width */
+        }
+
+        .achievements-grid {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        @media (min-width: 1024px) {
+            .achievements-grid {
+                flex-wrap: nowrap;
+            }
+        }
+
+        .achievement-card {
+            flex: 1;
+            min-width: 300px;
+            max-width: 380px;
+        }
+
+        .space-card:hover {
+            transform: translateY(-8px);
+            border-color: rgba(56, 189, 248, 0.3);
+            box-shadow: 0 10px 30px -10px rgba(56, 189, 248, 0.2);
+        }
+
+        /* Achievement Icons Animation */
+        .achievement-icon {
+            animation: iconFloat 3s ease-in-out infinite;
+        }
+
+        @keyframes iconFloat {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        /* Achievement Cards Animation */
+        .achievement-card {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .achievement-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Achievement Badges */
+        .achievement-badge {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.1),
+                transparent
+            );
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes shimmer {
+            100% { left: 100%; }
+        }
+
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #38bdf8, #818cf8);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        /* Section Divider Animation */
+        .section-divider {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .section-divider::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 200%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(56, 189, 248, 0.8),
+                transparent
+            );
+            animation: dividerShine 3s infinite;
+        }
+
+        @keyframes dividerShine {
+            100% { left: 100%; }
+        }
+
+        /* Achievement Section Background */
+        .achievements-section {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievements-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary), transparent);
+        }
+
+        /* Update Achievement Section HTML */
     </style>
 </head>
 <body>
@@ -1170,48 +1633,113 @@
         </div>
     </section>
 
-    <!-- Education Section -->
-    <section id="education" class="education-section">
-        <h2 class="section-title">Education</h2>
-        <div class="achievements-container">
-            <div class="achievement-card">
-                <h3>Bachelor's Degree in Artificial Intelligence And Data Science</h3>
-                <p class="institution">Viswajyothi College Of Engineering And Technology, Vazhakulam</p>
-                <p class="period">01/2022 - 01/2026</p>
-                <p>Focusing on AI algorithms, machine learning models, and data analytics to solve real-world problems.</p>
-            </div>
-            <div class="achievement-card">
-                <h3>Higher Secondary Education</h3>
-                <p class="institution">KEEMS Mannanam</p>
-                <p class="period">01/2020 - 01/2022</p>
-                <p>Completed higher secondary education with focus on science and mathematics.</p>
-            </div>
-        </div>
-    </section>
-
     <!-- Projects -->
     <section id="projects" class="projects-section">
         <h2 class="section-title">Projects</h2>
         <div class="project-grid">
-            <div class="project-card" onclick="openModal('spectacles')">
-                <h4>Smart Spectacles 👓</h4>
-                <p>Computer Vision for Visually Impaired</p>
-                <button class="view-project">View Details</button>
+            <div class="project-card">
+                <div class="project-thumbnail">
+                    <img src="https://img.freepik.com/free-vector/artificial-intelligence-concept-illustration_114360-7000.jpg" alt="Smart Acad Project">
+                    <div class="project-thumbnail-overlay">
+                        <div class="project-thumbnail-text">AI-Powered Learning Platform</div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <div>
+                        <h4>Smart Acad 🎓</h4>
+                        <p>AI-Powered Educational Platform</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">AI</span>
+                            <span class="tech-tag">Machine Learning</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/cyriac-pullan/smartacad" target="_blank" class="project-link github-link">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                        <button class="view-project" onclick="openModal('smartacad')">View Details</button>
+                    </div>
+                </div>
             </div>
-            <div class="project-card" onclick="openModal('maven')">
-                <h4>Market Maven 📈</h4>
-                <p>AI Sales Forecasting</p>
-                <button class="view-project">View Details</button>
+            <div class="project-card">
+                <div class="project-thumbnail">
+                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MDAgMTAwIj48c3R5bGU+LmxldHRlci1ib3h7ZmlsbDojNmFhYTY0O3N0cm9rZTojNmFhYTY0O3N0cm9rZS13aWR0aDoxfS5sZXR0ZXJ7ZmlsbDp3aGl0ZTtmb250LWZhbWlseTpBcmlhbDtmb250LXNpemU6NjBweDtmb250LXdlaWdodDpib2xkO3RleHQtYW5jaG9yOm1pZGRsZX08L3N0eWxlPjxyZWN0IGNsYXNzPSJsZXR0ZXItYm94IiB4PSIxMCIgeT0iMTAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIvPjx0ZXh0IGNsYXNzPSJsZXR0ZXIiIHg9IjUwIiB5PSI3MCI+VzwvdGV4dD48cmVjdCBjbGFzcz0ibGV0dGVyLWJveCIgeD0iMTAwIiB5PSIxMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIi8+PHRleHQgY2xhc3M9ImxldHRlciIgeD0iMTQwIiB5PSI3MCI+TzwvdGV4dD48cmVjdCBjbGFzcz0ibGV0dGVyLWJveCIgeD0iMTkwIiB5PSIxMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIi8+PHRleHQgY2xhc3M9ImxldHRlciIgeD0iMjMwIiB5PSI3MCI+UjwvdGV4dD48cmVjdCBjbGFzcz0ibGV0dGVyLWJveCIgeD0iMjgwIiB5PSIxMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIi8+PHRleHQgY2xhc3M9ImxldHRlciIgeD0iMzIwIiB5PSI3MCI+RDwvdGV4dD48cmVjdCBjbGFzcz0ibGV0dGVyLWJveCIgeD0iMzcwIiB5PSIxMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIi8+PHRleHQgY2xhc3M9ImxldHRlciIgeD0iNDEwIiB5PSI3MCI+TDwvdGV4dD48cmVjdCBjbGFzcz0ibGV0dGVyLWJveCIgeD0iNDYwIiB5PSIxMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIi8+PHRleHQgY2xhc3M9ImxldHRlciIgeD0iNTAwIiB5PSI3MCI+RTwvdGV4dD48L3N2Zz4=" alt="Wordle Timeshift Project">
+                    <div class="project-thumbnail-overlay">
+                        <div class="project-thumbnail-text">Time-Based Word Puzzle Game</div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <div>
+                        <h4>Wordle Timeshift 🎮</h4>
+                        <p>Time-based Word Puzzle Game</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/cyriac-pullan/wordle-timeshift" target="_blank" class="project-link github-link">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                        <a href="https://cyriac-pullan.github.io/wordle-timeshift" target="_blank" class="project-link demo-link">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
             </div>
-            <div class="project-card" onclick="openModal('healthcare')">
-                <h4>Healthcare App 🏥</h4>
-                <p>Android Application for Healthcare Services</p>
-                <button class="view-project">View Details</button>
+            <div class="project-card">
+                <div class="project-thumbnail">
+                    <img src="https://img.freepik.com/free-vector/medical-assistant-robot-concept_23-2148520389.jpg" alt="CURABOT Project">
+                    <div class="project-thumbnail-overlay">
+                        <div class="project-thumbnail-text">AI Healthcare Assistant</div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <div>
+                        <h4>CURABOT 🤖</h4>
+                        <p>AI-Powered Healthcare Assistant</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">AI</span>
+                            <span class="tech-tag">Healthcare</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/cyriac-pullan/CURABOT" target="_blank" class="project-link github-link">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                        <button class="view-project" onclick="openModal('curabot')">View Details</button>
+                    </div>
+                </div>
             </div>
-            <div class="project-card" onclick="openModal('airplane')">
-                <h4>Airplane Control Game 🎮</h4>
-                <p>Using MPU6050 and ESP32</p>
-                <button class="view-project">View Details</button>
+            <div class="project-card">
+                <div class="project-thumbnail">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Portfolio Website Project">
+                    <div class="project-thumbnail-overlay">
+                        <div class="project-thumbnail-text">Modern Portfolio Website</div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <div>
+                        <h4>Portfolio Website 🌐</h4>
+                        <p>Personal Portfolio with Modern Design</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                            <span class="tech-tag">JavaScript</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/cyriac-pullan/portfolio" target="_blank" class="project-link github-link">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                        <a href="https://cyriac-pullan.github.io/portfolio" target="_blank" class="project-link demo-link">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -1315,100 +1843,140 @@
         </div>
     </section>
 
-    <!-- Languages -->
-    <section id="languages" class="languages-section">
-        <h2 class="section-title">Languages</h2>
-        <div class="languages-container">
-            <div class="language-card">
-                <h3 class="language-name">Malayalam</h3>
-                <p class="language-level">Native</p>
-            </div>
-            <div class="language-card">
-                <h3 class="language-name">English</h3>
-                <p class="language-level">Proficient</p>
-            </div>
-            <div class="language-card">
-                <h3 class="language-name">Hindi</h3>
-                <p class="language-level">Advanced</p>
-            </div>
-        </div>
-    </section>
-
     <!-- Achievements -->
     <section id="achievements" class="achievements-section">
         <h2 class="section-title">Achievements</h2>
         <div class="achievements-container">
             <div class="achievement-card">
-                <h3>Hackathon Success</h3>
-                <p>Secured 3rd place in a national-level hackathon for developing an innovative AI solution for education technology.</p>
+                <div class="achievement-icon">
+                    <i class="fas fa-trophy"></i>
+                </div>
+                <h3>ICTAK TECHATHLON</h3>
+                <p class="institution">ICTAK</p>
+                <p>First place in Innovation Challenge, showcasing excellence in AI solutions.</p>
+                <div class="achievement-badge">
+                    🥇 1st Place | 2024-25
+                </div>
             </div>
+
             <div class="achievement-card">
-                <h3>Infosys Training</h3>
-                <p>Successfully completed foundational training in emerging technologies at Infosys with excellent performance.</p>
+                <div class="achievement-icon">
+                    <i class="fas fa-medal"></i>
+                </div>
+                <h3>Gen AI Hackathon</h3>
+                <p class="institution">amFOSS</p>
+                <p>Third place in 24-hour national hackathon for AI healthcare solutions.</p>
+                <div class="achievement-badge">
+                    🥉 3rd Place | National
+                </div>
+                <a href="https://devpost.com/software/curabot-your-ai-powered-smart-healthcare-assistant" target="_blank" class="achievement-link">
+                    <i class="fas fa-external-link-alt"></i> View Project
+                </a>
+            </div>
+
+            <div class="achievement-card">
+                <div class="achievement-icon">
+                    <i class="fas fa-award"></i>
+                </div>
+                <h3>GATE 2025</h3>
+                <p class="institution">AI & Data Science</p>
+                <p>Qualified in AI & DS specialization with strong technical expertise.</p>
+                <div class="achievement-badge">
+                    🎯 GATE Qualified
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Project Modals -->
-    <div id="spectacles" class="modal">
+    <div id="smartacad" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h3 class="modal-title">Smart Spectacles for Visually Impaired Individuals</h3>
-            <p class="modal-tech">Technologies: Embedded Systems, Computer Vision</p>
-            <p class="modal-description">An innovative tool designed to assist visually impaired users in their daily navigation and object recognition tasks. The spectacles use computer vision algorithms to detect obstacles and provide audio feedback to the user.</p>
+            <h3 class="modal-title">Smart Acad - AI-Powered Educational Platform</h3>
+            <p class="modal-tech">Technologies: Python, AI, Machine Learning</p>
+            <p class="modal-description">An intelligent educational platform that leverages AI to provide personalized learning experiences and enhance student engagement.</p>
             <ul class="modal-features">
-                <li>Real-time obstacle detection and classification</li>
-                <li>Audio feedback system with distance indicators</li>
-                <li>Low-power embedded system design</li>
-                <li>Custom computer vision algorithms optimized for edge devices</li>
+                <li>AI-powered content personalization</li>
+                <li>Adaptive learning algorithms</li>
+                <li>Real-time progress tracking</li>
+                <li>Interactive learning modules</li>
             </ul>
         </div>
     </div>
 
-    <div id="maven" class="modal">
+    <div id="wordle" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h3 class="modal-title">Market Maven - AI-Driven Sales Forecasting</h3>
-            <p class="modal-tech">Technologies: Python, Machine Learning, ARIMA</p>
-            <p class="modal-description">A retail analytics platform that enhances sales forecasting accuracy using AI-driven analytics and time-series prediction models. The system helps retailers optimize inventory and marketing strategies.</p>
+            <h3 class="modal-title">Wordle Timeshift</h3>
+            <p class="modal-tech">Technologies: JavaScript, HTML, CSS</p>
+            <p class="modal-description">A time-based variation of the popular Wordle game, adding an exciting temporal twist to the classic word-guessing gameplay.</p>
             <ul class="modal-features">
-                <li>Time-series forecasting with ARIMA models</li>
-                <li>Integration with retail POS systems</li>
-                <li>Interactive dashboard for sales visualization</li>
-                <li>Demand prediction with 85% accuracy</li>
+                <li>Time-based gameplay mechanics</li>
+                <li>Responsive design</li>
+                <li>Local storage for game progress</li>
+                <li>Custom word lists and themes</li>
             </ul>
         </div>
     </div>
 
-    <div id="healthcare" class="modal">
+    <div id="doctor" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h3 class="modal-title">Healthcare Android Application</h3>
-            <p class="modal-tech">Technologies: Java, Android SDK, Firebase</p>
-            <p class="modal-description">A mobile application designed to streamline healthcare services by connecting patients with healthcare providers and facilitating appointment scheduling, medication reminders, and telemedicine services.</p>
+            <h3 class="modal-title">Doctor App</h3>
+            <p class="modal-tech">Technologies: Python, Healthcare, Database</p>
+            <p class="modal-description">A comprehensive healthcare management system designed to streamline doctor-patient interactions and medical record management.</p>
             <ul class="modal-features">
-                <li>Secure patient-doctor communication</li>
-                <li>Appointment scheduling system</li>
-                <li>Medication reminder with push notifications</li>
-                <li>Integration with health tracking devices</li>
+                <li>Patient record management</li>
+                <li>Appointment scheduling</li>
+                <li>Medical history tracking</li>
+                <li>Secure data storage</li>
             </ul>
         </div>
     </div>
 
-    <div id="airplane" class="modal">
+    <div id="curabot" class="modal">
         <div class="modal-content">
             <span class="close-modal" onclick="closeModal()">&times;</span>
-            <h3 class="modal-title">Airplane Control Game Using MPU6050 and ESP32</h3>
-            <p class="modal-tech">Technologies: Embedded Systems, C++, IoT</p>
-            <p class="modal-description">An interactive gaming experience that showcases the integration of hardware and software. The game uses motion sensors to control an airplane in a virtual environment, demonstrating real-time data processing and control systems.</p>
+            <h3 class="modal-title">CURABOT - AI Healthcare Assistant</h3>
+            <p class="modal-tech">Technologies: HTML, AI, Healthcare</p>
+            <p class="modal-description">An AI-powered healthcare assistant that provides intelligent responses to medical queries and helps in preliminary diagnosis.</p>
             <ul class="modal-features">
-                <li>Motion control using MPU6050 accelerometer/gyroscope</li>
-                <li>Real-time data processing on ESP32 microcontroller</li>
-                <li>Wireless communication with game interface</li>
-                <li>Physics-based flight simulation</li>
+                <li>AI-powered medical assistance</li>
+                <li>Natural language processing</li>
+                <li>Medical knowledge base</li>
+                <li>User-friendly interface</li>
             </ul>
         </div>
     </div>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-container">
+            <h2 class="section-title">Get in Touch</h2>
+            <form class="contact-form" id="contactForm">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+            <div class="contact-info">
+                <p>Or reach out directly at: <a href="mailto:cyriacpullan@gmail.com">cyriacpullan@gmail.com</a></p>
+            </div>
+        </div>
+    </section>
 
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
@@ -1548,6 +2116,41 @@
                 typewriter.style.width = '100%';
             }, 100);
         }
+
+        // Contact Form Handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = {
+                name: document.getElementById('name').value,
+                email: document.getElementById('email').value,
+                subject: document.getElementById('subject').value,
+                message: document.getElementById('message').value
+            };
+
+            // Here you would typically send the form data to a server
+            // For now, we'll just show a success message
+            alert('Thank you for your message! I will get back to you soon.');
+            this.reset();
+        });
+
+        // Achievement cards animation
+        document.addEventListener('DOMContentLoaded', function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+
+            document.querySelectorAll('.achievement-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
     </script>
 </body>
 </html>
