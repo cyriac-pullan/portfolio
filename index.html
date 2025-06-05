@@ -1600,6 +1600,37 @@
         }
 
         /* Update Achievement Section HTML */
+        .achievement-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1rem;
+        }
+
+        .achievement-badge {
+            background: var(--accent);
+            color: var(--light);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: inline-block;
+        }
+
+        .achievement-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .achievement-link:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
     </style>
 </head>
 <body>
@@ -2029,12 +2060,14 @@
                 <h3>Gen AI Hackathon</h3>
                 <p class="institution">amFOSS</p>
                 <p>Third place in 24-hour national hackathon for AI healthcare solutions.</p>
-                <div class="achievement-badge">
-                    🥉 3rd Place | National
+                <div class="achievement-footer">
+                    <div class="achievement-badge">
+                        🥉 3rd Place | National
+                    </div>
+                    <a href="https://devpost.com/software/curabot-your-ai-powered-smart-healthcare-assistant" target="_blank" class="achievement-link">
+                        <i class="fas fa-external-link-alt"></i> View Project
+                    </a>
                 </div>
-                <a href="https://devpost.com/software/curabot-your-ai-powered-smart-healthcare-assistant" target="_blank" class="achievement-link">
-                    <i class="fas fa-external-link-alt"></i> View Project
-                </a>
             </div>
 
             <div class="achievement-card">
