@@ -267,7 +267,7 @@
         /* About Section */
         .about-section {
             padding: 6rem 2rem;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             text-align: center;
         }
@@ -290,19 +290,69 @@
             background: var(--accent);
         }
 
+        /* About Section Animations */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .about-content.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .about-image {
+            flex: 0 0 300px;
+            height: 300px;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 3px solid var(--primary);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.2);
+            position: relative;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
         .summary {
+            flex: 1;
             font-size: 1.1rem;
             line-height: 1.8;
             text-align: left;
-            padding: 1rem;
-            background: rgba(248, 250, 252, 0.05);
+            padding: 2rem;
+            background: rgba(15, 23, 42, 0.7);
             border-radius: 15px;
-            border: 1px solid rgba(248, 250, 252, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s;
         }
 
-        body.light-theme .summary {
-            background: rgba(15, 23, 42, 0.05);
-            border: 1px solid rgba(15, 23, 42, 0.1);
+        .about-content.visible .summary {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .about-image {
+                flex: 0 0 250px;
+                height: 250px;
+            }
         }
 
         /* Timeline */
@@ -466,6 +516,7 @@
         /* Projects */
         .projects-section {
             padding: 6rem 2rem;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(37, 99, 235, 0.1));
         }
 
         .project-grid {
@@ -476,8 +527,9 @@
             margin: 0 auto;
         }
 
+        /* Project Card Animations */
         .project-card {
-            background: rgba(37, 99, 235, 0.05);
+            background: rgba(15, 23, 42, 0.7);
             border-radius: 15px;
             padding: 0;
             transition: var(--transition);
@@ -488,8 +540,31 @@
             position: relative;
             overflow: hidden;
             border: 1px solid rgba(37, 99, 235, 0.1);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+        }
+
+        .project-card.visible {
+            opacity: 1;
             transform: translateY(0);
-            transition: all 0.3s ease;
+        }
+
+        .project-card:nth-child(odd) {
+            transition-delay: 0.2s;
+        }
+
+        .project-card:nth-child(even) {
+            transition-delay: 0.4s;
+        }
+
+        .project-card:nth-child(3n) {
+            transition-delay: 0.6s;
+        }
+
+        .project-card:nth-child(3n+1) {
+            transition-delay: 0.8s;
         }
 
         .project-card:hover {
@@ -500,7 +575,7 @@
 
         .project-thumbnail {
             width: 100%;
-            height: 240px;
+            height: 200px;
             overflow: hidden;
             position: relative;
             background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(244, 63, 94, 0.1));
@@ -509,31 +584,12 @@
         .project-thumbnail img {
             width: 100%;
             height: 100%;
-            object-fit: contain;
-            padding: 1rem;
+            object-fit: cover;
             transition: all 0.3s ease;
-            background: rgba(15, 23, 42, 0.8);
         }
 
         .project-card:hover .project-thumbnail img {
             transform: scale(1.05);
-        }
-
-        .project-thumbnail::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(37, 99, 235, 0.2), rgba(244, 63, 94, 0.2));
-            z-index: 1;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .project-card:hover .project-thumbnail::before {
-            opacity: 1;
         }
 
         .project-thumbnail-overlay {
@@ -582,8 +638,21 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            background: rgba(37, 99, 235, 0.05);
+            background: rgba(15, 23, 42, 0.7);
             border-top: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        .project-content h4 {
+            color: var(--light);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .project-content p {
+            color: var(--light);
+            opacity: 0.9;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
 
         .project-tech {
@@ -594,7 +663,7 @@
         }
 
         .tech-tag {
-            background: rgba(37, 99, 235, 0.1);
+            background: rgba(37, 99, 235, 0.2);
             color: var(--primary);
             padding: 0.3rem 0.6rem;
             border-radius: 12px;
@@ -603,7 +672,7 @@
         }
 
         .project-card:hover .tech-tag {
-            background: rgba(37, 99, 235, 0.2);
+            background: rgba(37, 99, 235, 0.3);
         }
 
         .project-links {
@@ -624,7 +693,7 @@
         }
 
         .github-link {
-            background: rgba(37, 99, 235, 0.1);
+            background: rgba(37, 99, 235, 0.2);
             color: var(--primary);
         }
 
@@ -635,7 +704,7 @@
         }
 
         .demo-link {
-            background: rgba(244, 63, 94, 0.1);
+            background: rgba(244, 63, 94, 0.2);
             color: var(--accent);
         }
 
@@ -645,27 +714,18 @@
             transform: translateY(-2px);
         }
 
-        .view-project {
-            background: var(--primary);
-            color: var(--light);
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            text-align: center;
-            width: 100%;
-            font-size: 0.9rem;
-        }
-
-        .view-project:hover {
-            background: var(--accent);
-            transform: translateY(-2px);
-        }
-
         body.light-theme .project-card {
             background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(15, 23, 42, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+
+        body.light-theme .project-content {
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        body.light-theme .project-content h4,
+        body.light-theme .project-content p {
+            color: var(--light);
         }
 
         body.light-theme .tech-tag {
@@ -675,7 +735,7 @@
         /* Skills */
         .skills-section {
             padding: 6rem 2rem;
-            background: linear-gradient(135deg, rgba(26, 26, 26, 0.9), rgba(42, 92, 130, 0.1));
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(37, 99, 235, 0.1));
         }
 
         .skills-container {
@@ -691,10 +751,11 @@
 
         .skill-category {
             margin-bottom: 3rem;
-            background: rgba(248, 250, 252, 0.1);
+            background: rgba(15, 23, 42, 0.7);
             padding: 2rem;
             border-radius: 15px;
-            border: 1px solid rgba(248, 250, 252, 0.2);
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            backdrop-filter: blur(10px);
         }
 
         .skill-category h3 {
@@ -706,10 +767,10 @@
 
         .skill {
             margin-bottom: 1.5rem;
-            background: rgba(248, 250, 252, 0.05);
+            background: rgba(15, 23, 42, 0.5);
             padding: 1rem;
             border-radius: 10px;
-            border: 1px solid rgba(248, 250, 252, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.1);
         }
 
         .skill-name {
@@ -726,10 +787,10 @@
 
         .skill-bar {
             height: 10px;
-            background: rgba(248, 250, 252, 0.1);
+            background: rgba(15, 23, 42, 0.3);
             border-radius: 5px;
             overflow: hidden;
-            border: 1px solid rgba(248, 250, 252, 0.2);
+            border: 1px solid rgba(37, 99, 235, 0.1);
         }
 
         .skill-progress {
@@ -741,18 +802,18 @@
 
         /* Light Theme Skills */
         body.light-theme .skills-section {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(30, 41, 59, 0.1));
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(37, 99, 235, 0.1));
         }
 
         body.light-theme .skill-category {
             background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(30, 41, 59, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.1);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
         }
 
         body.light-theme .skill {
             background: rgba(255, 255, 255, 0.9);
-            border: 1px solid rgba(30, 41, 59, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.1);
         }
 
         body.light-theme .skill-name {
@@ -760,8 +821,8 @@
         }
 
         body.light-theme .skill-bar {
-            background: rgba(30, 41, 59, 0.1);
-            border: 1px solid rgba(30, 41, 59, 0.2);
+            background: rgba(37, 99, 235, 0.1);
+            border: 1px solid rgba(37, 99, 235, 0.2);
         }
 
         /* Languages */
@@ -1601,8 +1662,13 @@
     <!-- About Section -->
     <section id="about" class="about-section">
         <h2>About Me</h2>
-        <div class="summary">
-            <p>I am a dynamic software development intern with experience at Infosys. I specialize in Python programming and machine learning, having successfully enhanced AI models for e-learning platforms. My role at Acadamer demonstrated my strong problem-solving skills and ability to collaborate effectively on complex projects. I thrive in environments that challenge my creativity and technical skills.</p>
+        <div class="about-content">
+            <div class="about-image">
+                <img src="profile.jpg" alt="Cyriac Paul Pullan">
+            </div>
+            <div class="summary">
+                <p>I am a dynamic software development intern with experience at Infosys. I specialize in Python programming and machine learning, having successfully enhanced AI models for e-learning platforms. My role at Acadamer demonstrated my strong problem-solving skills and ability to collaborate effectively on complex projects. I thrive in environments that challenge my creativity and technical skills.</p>
+            </div>
         </div>
     </section>
 
@@ -1639,59 +1705,7 @@
         <div class="project-grid">
             <div class="project-card">
                 <div class="project-thumbnail">
-                    <img src="https://img.freepik.com/free-vector/artificial-intelligence-concept-illustration_114360-7000.jpg" alt="Smart Acad Project">
-                    <div class="project-thumbnail-overlay">
-                        <div class="project-thumbnail-text">AI-Powered Learning Platform</div>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <div>
-                        <h4>Smart Acad 🎓</h4>
-                        <p>AI-Powered Educational Platform</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">AI</span>
-                            <span class="tech-tag">Machine Learning</span>
-                        </div>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/cyriac-pullan/smartacad" target="_blank" class="project-link github-link">
-                            <i class="fab fa-github"></i> Repository
-                        </a>
-                        <button class="view-project" onclick="openModal('smartacad')">View Details</button>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="project-thumbnail">
-                    <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MDAgMTAwIj48c3R5bGU+LmxldHRlci1ib3h7ZmlsbDojNmFhYTY0O3N0cm9rZTojNmFhYTY0O3N0cm9rZS13aWR0aDoxfS5sZXR0ZXJ7ZmlsbDp3aGl0ZTtmb250LWZhbWlseTpBcmlhbDtmb250LXNpemU6NjBweDtmb250LXdlaWdodDpib2xkO3RleHQtYW5jaG9yOm1pZGRsZX08L3N0eWxlPjxyZWN0IGNsYXNzPSJsZXR0ZXItYm94IiB4PSIxMCIgeT0iMTAiIHdpZHRoPSI4MCIgaGVpZ2h0PSI4MCIvPjx0ZXh0IGNsYXNzPSJsZXR0ZXIiIHg9IjUwIiB5PSI3MCI+VzwvdGV4dD48cmVjdCBjbGFzcz0ibGV0dGVyLWJveCIgeD0iMTAwIiB5PSIxMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIi8+PHRleHQgY2xhc3M9ImxldHRlciIgeD0iMTQwIiB5PSI3MCI+TzwvdGV4dD48cmVjdCBjbGFzcz0ibGV0dGVyLWJveCIgeD0iMTkwIiB5PSIxMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIi8+PHRleHQgY2xhc3M9ImxldHRlciIgeD0iMjMwIiB5PSI3MCI+UjwvdGV4dD48cmVjdCBjbGFzcz0ibGV0dGVyLWJveCIgeD0iMjgwIiB5PSIxMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIi8+PHRleHQgY2xhc3M9ImxldHRlciIgeD0iMzIwIiB5PSI3MCI+RDwvdGV4dD48cmVjdCBjbGFzcz0ibGV0dGVyLWJveCIgeD0iMzcwIiB5PSIxMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIi8+PHRleHQgY2xhc3M9ImxldHRlciIgeD0iNDEwIiB5PSI3MCI+TDwvdGV4dD48cmVjdCBjbGFzcz0ibGV0dGVyLWJveCIgeD0iNDYwIiB5PSIxMCIgd2lkdGg9IjgwIiBoZWlnaHQ9IjgwIi8+PHRleHQgY2xhc3M9ImxldHRlciIgeD0iNTAwIiB5PSI3MCI+RTwvdGV4dD48L3N2Zz4=" alt="Wordle Timeshift Project">
-                    <div class="project-thumbnail-overlay">
-                        <div class="project-thumbnail-text">Time-Based Word Puzzle Game</div>
-                    </div>
-                </div>
-                <div class="project-content">
-                    <div>
-                        <h4>Wordle Timeshift 🎮</h4>
-                        <p>Time-based Word Puzzle Game</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                        </div>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://github.com/cyriac-pullan/wordle-timeshift" target="_blank" class="project-link github-link">
-                            <i class="fab fa-github"></i> Repository
-                        </a>
-                        <a href="https://cyriac-pullan.github.io/wordle-timeshift" target="_blank" class="project-link demo-link">
-                            <i class="fas fa-external-link-alt"></i> Live Demo
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="project-card">
-                <div class="project-thumbnail">
-                    <img src="https://img.freepik.com/free-vector/medical-assistant-robot-concept_23-2148520389.jpg" alt="CURABOT Project">
+                    <img src="https://img.freepik.com/free-vector/medical-assistant-robot-concept_23-2148520389.jpg" alt="CURABOT">
                     <div class="project-thumbnail-overlay">
                         <div class="project-thumbnail-text">AI Healthcare Assistant</div>
                     </div>
@@ -1699,32 +1713,130 @@
                 <div class="project-content">
                     <div>
                         <h4>CURABOT 🤖</h4>
-                        <p>AI-Powered Healthcare Assistant</p>
+                        <p>An AI-powered healthcare assistant that provides intelligent medical guidance and preliminary diagnosis. Features natural language processing for medical queries and a comprehensive medical knowledge base.</p>
                         <div class="project-tech">
-                            <span class="tech-tag">HTML</span>
                             <span class="tech-tag">AI</span>
                             <span class="tech-tag">Healthcare</span>
+                            <span class="tech-tag">NLP</span>
                         </div>
                     </div>
                     <div class="project-links">
                         <a href="https://github.com/cyriac-pullan/CURABOT" target="_blank" class="project-link github-link">
                             <i class="fab fa-github"></i> Repository
                         </a>
-                        <button class="view-project" onclick="openModal('curabot')">View Details</button>
                     </div>
                 </div>
             </div>
             <div class="project-card">
                 <div class="project-thumbnail">
-                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Portfolio Website Project">
+                    <img src="https://img.freepik.com/free-vector/cyber-security-concept-illustration_114360-7964.jpg" alt="cyber-threat-monitor">
                     <div class="project-thumbnail-overlay">
-                        <div class="project-thumbnail-text">Modern Portfolio Website</div>
+                        <div class="project-thumbnail-text">Cyber Threat Monitor</div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <div>
+                        <h4>Cyber Threat Monitor 🛡️</h4>
+                        <p>A real-time cybersecurity monitoring system that tracks and alerts users about potential security threats. Implements advanced threat detection algorithms and automated response mechanisms.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Security</span>
+                            <span class="tech-tag">Python</span>
+                            <span class="tech-tag">Monitoring</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/cyriac-pullan/cyber-threat-monitor" target="_blank" class="project-link github-link">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-thumbnail">
+                    <img src="https://img.freepik.com/free-vector/food-delivery-concept-illustration_114360-457.jpg" alt="delispi">
+                    <div class="project-thumbnail-overlay">
+                        <div class="project-thumbnail-text">Delispi</div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <div>
+                        <h4>Delispi 🍕</h4>
+                        <p>A food delivery platform that connects users with local restaurants. Features real-time order tracking, restaurant ratings, and an intuitive user interface for seamless food ordering experience.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Web App</span>
+                            <span class="tech-tag">Delivery</span>
+                            <span class="tech-tag">UI/UX</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/cyriac-pullan/delispi" target="_blank" class="project-link github-link">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                        <a href="https://cyriac-pullan.github.io/delispi" target="_blank" class="project-link demo-link">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-thumbnail">
+                    <img src="https://img.freepik.com/free-vector/doctor-character-background_1270-84.jpg" alt="doctor">
+                    <div class="project-thumbnail-overlay">
+                        <div class="project-thumbnail-text">Doctor App</div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <div>
+                        <h4>Doctor App 👨‍⚕️</h4>
+                        <p>A comprehensive healthcare management system for doctors and patients. Includes appointment scheduling, patient records management, and medical history tracking with secure data storage.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Healthcare</span>
+                            <span class="tech-tag">Database</span>
+                            <span class="tech-tag">Management</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/cyriac-pullan/doctor" target="_blank" class="project-link github-link">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-thumbnail">
+                    <img src="https://img.freepik.com/free-vector/artificial-intelligence-concept-illustration_114360-7000.jpg" alt="llmware">
+                    <div class="project-thumbnail-overlay">
+                        <div class="project-thumbnail-text">llmware</div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <div>
+                        <h4>llmware 🧠</h4>
+                        <p>Unified framework for building enterprise RAG pipelines with small, specialized models. Enables efficient implementation of retrieval-augmented generation for enterprise applications.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">AI</span>
+                            <span class="tech-tag">RAG</span>
+                            <span class="tech-tag">Enterprise</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/cyriac-pullan/llmware" target="_blank" class="project-link github-link">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-thumbnail">
+                    <img src="https://img.freepik.com/free-vector/portfolio-concept-illustration_114360-7965.jpg" alt="portfolio">
+                    <div class="project-thumbnail-overlay">
+                        <div class="project-thumbnail-text">Portfolio Website</div>
                     </div>
                 </div>
                 <div class="project-content">
                     <div>
                         <h4>Portfolio Website 🌐</h4>
-                        <p>Personal Portfolio with Modern Design</p>
+                        <p>A modern, responsive portfolio website showcasing my projects and skills. Features a clean design, dark/light theme toggle, and interactive elements for an engaging user experience.</p>
                         <div class="project-tech">
                             <span class="tech-tag">HTML</span>
                             <span class="tech-tag">CSS</span>
@@ -1736,6 +1848,57 @@
                             <i class="fab fa-github"></i> Repository
                         </a>
                         <a href="https://cyriac-pullan.github.io/portfolio" target="_blank" class="project-link demo-link">
+                            <i class="fas fa-external-link-alt"></i> Live Demo
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-thumbnail">
+                    <img src="https://img.freepik.com/free-vector/artificial-intelligence-concept-illustration_114360-7000.jpg" alt="smartacad">
+                    <div class="project-thumbnail-overlay">
+                        <div class="project-thumbnail-text">Smart Acad</div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <div>
+                        <h4>Smart Acad 🎓</h4>
+                        <p>An AI-powered educational platform that personalizes learning experiences. Implements adaptive learning algorithms and real-time progress tracking for enhanced student engagement.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">AI</span>
+                            <span class="tech-tag">Education</span>
+                            <span class="tech-tag">ML</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/cyriac-pullan/smartacad" target="_blank" class="project-link github-link">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="project-card">
+                <div class="project-thumbnail">
+                    <img src="https://img.freepik.com/free-vector/wordle-game-concept-illustration_114360-7966.jpg" alt="wordle-timeshift">
+                    <div class="project-thumbnail-overlay">
+                        <div class="project-thumbnail-text">Wordle Timeshift</div>
+                    </div>
+                </div>
+                <div class="project-content">
+                    <div>
+                        <h4>Wordle Timeshift 🎮</h4>
+                        <p>A time-based variation of the popular Wordle game. Features unique temporal mechanics, responsive design, and local storage for game progress tracking.</p>
+                        <div class="project-tech">
+                            <span class="tech-tag">JavaScript</span>
+                            <span class="tech-tag">HTML</span>
+                            <span class="tech-tag">CSS</span>
+                        </div>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/cyriac-pullan/wordle-timeshift" target="_blank" class="project-link github-link">
+                            <i class="fab fa-github"></i> Repository
+                        </a>
+                        <a href="https://cyriac-pullan.github.io/wordle-timeshift" target="_blank" class="project-link demo-link">
                             <i class="fas fa-external-link-alt"></i> Live Demo
                         </a>
                     </div>
@@ -1949,6 +2112,52 @@
         </div>
     </div>
 
+    <!-- Add new modal sections for the new projects -->
+    <div id="ai-projects" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3 class="modal-title">AI Projects Collection</h3>
+            <p class="modal-tech">Technologies: Python, AI, Machine Learning</p>
+            <p class="modal-description">A collection of artificial intelligence projects showcasing various AI implementations and solutions.</p>
+            <ul class="modal-features">
+                <li>Multiple AI implementations</li>
+                <li>Neural network projects</li>
+                <li>Deep learning models</li>
+                <li>AI-based solutions</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="ml-projects" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3 class="modal-title">Machine Learning Projects</h3>
+            <p class="modal-tech">Technologies: Python, Machine Learning, Data Science</p>
+            <p class="modal-description">A collection of machine learning projects demonstrating various ML algorithms and implementations.</p>
+            <ul class="modal-features">
+                <li>ML algorithm implementations</li>
+                <li>Data analysis projects</li>
+                <li>Predictive modeling</li>
+                <li>Statistical analysis</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="python-projects" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h3 class="modal-title">Python Projects Collection</h3>
+            <p class="modal-tech">Technologies: Python, Programming, Automation</p>
+            <p class="modal-description">A collection of Python programming projects showcasing various applications and solutions.</p>
+            <ul class="modal-features">
+                <li>Python applications</li>
+                <li>Automation scripts</li>
+                <li>Web development</li>
+                <li>Data processing</li>
+            </ul>
+        </div>
+    </div>
+
     <!-- Contact Section -->
     <section class="contact-section" id="contact">
         <div class="contact-container">
@@ -2056,7 +2265,7 @@
             rootMargin: '0px 0px -100px 0px'
         });
 
-        document.querySelectorAll('.timeline-node, .skill, .education-card, .achievement-card').forEach(el => {
+        document.querySelectorAll('.timeline-node, .skill, .education-card, .achievement-card, .about-content, .project-card').forEach(el => {
             observer.observe(el);
         });
 
@@ -2118,7 +2327,7 @@
         }
 
         // Contact Form Handling
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
+        document.getElementById('contactForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             // Get form data
@@ -2129,10 +2338,27 @@
                 message: document.getElementById('message').value
             };
 
-            // Here you would typically send the form data to a server
-            // For now, we'll just show a success message
-            alert('Thank you for your message! I will get back to you soon.');
-            this.reset();
+            try {
+                const response = await fetch('http://localhost:3000/api/contact', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (response.ok) {
+                    alert('Thank you for your message! I will get back to you soon.');
+                    this.reset();
+                } else {
+                    throw new Error(data.message || 'Something went wrong');
+                }
+            } catch (error) {
+                alert('Failed to send message. Please try again later.');
+                console.error('Error:', error);
+            }
         });
 
         // Achievement cards animation
